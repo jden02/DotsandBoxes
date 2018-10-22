@@ -1,10 +1,21 @@
 from easyAI import TwoPlayersGame
 from easyAI.Player import Human_Player
+from termcolor import colored
 
 class DotsAndBoxes( TwoPlayersGame ):
     """ The board positions are numbered as follows:
+        * 1 * 2 * 3 * 4 *
+        5   6   7   8   9
+        *10 *11 *12 *13 *
+        14  15  16  17 18
+        * 19 * 20 * 21 * 22 *
+        23  24   25   26   27
+        * 28 * 29 * 30 * 31 *
+        32  33    34   35   36
+        * 37 * 38 * 39 * 40 *
 
     """
+    board = [[]]
 
     def __init__(self, players):
         self.players = players
@@ -19,6 +30,8 @@ class DotsAndBoxes( TwoPlayersGame ):
             boxArray.append([i, i+4, i+5, i+9])
             if i in skip:
                 i += 6
+            else:
+                i += 1
         return boxArray
 
     def possible_moves(self):
@@ -43,10 +56,7 @@ class DotsAndBoxes( TwoPlayersGame ):
         
     def show(self):
         print(self.boxes())
-        print ('\n'+'\n'.join([
-                        ' '.join([['.','O','X'][self.board[3*j+i]]
-                        for i in range(3)])
-                 for j in range(3)]) )
+        print ()
                  
     def scoring(self):
         return -100 if self.lose() else 0
